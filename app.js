@@ -27,6 +27,14 @@ app.get('/', (req, res) => {
     .catch((error) => console.error(error))
 })
 
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('detail', { restaurant }))
+    .catch((error) => console.error(error))
+})
+
 app.listen(PORT, () => {
-  console.log(`Ther server is running on http://localhost:${PORT}`)
+  console.log(`The server is running on http://localhost:${PORT}`)
 })
