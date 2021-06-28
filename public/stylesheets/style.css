@@ -99,3 +99,13 @@ header {
   }
   
 }
+
+.error-message {
+  text-align: center;
+  border: 2px solid #9b4b4b;
+}
+
+.fa-sad-tear {
+  margin-right: 10px;
+  color: #9b4b4b;
+}

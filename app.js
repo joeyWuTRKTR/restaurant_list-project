@@ -35,6 +35,25 @@ app.get('/restaurants/:id', (req, res) => {
     .catch((error) => console.error(error))
 })
 
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword.trim().toLowerCase()
+  Restaurant.find()
+    .lean()
+    .then((restaurants) => {
+      if (keyword) {
+        restaurants = restaurants.filter((restaurant) =>
+          restaurant.name.toLowerCase().includes(keyword) ||
+          restaurant.category.includes(keyword))
+      }
+      if (restaurants.length === 0) {
+        const error = '很遺憾，沒有符合搜尋的結果。'
+        return res.render('index', { error })
+      }
+      res.render('index', { restaurants })
+    })
+    .catch((error) => console.error(error))
+})
+
 app.listen(PORT, () => {
   console.log(`The server is running on http://localhost:${PORT}`)
 })
