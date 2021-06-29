@@ -101,8 +101,13 @@ header {
 }
 
 .error-message {
+  margin-top: 3rem;
   text-align: center;
   border: 2px solid #9b4b4b;
+}
+
+.error-message h2 {
+  margin: 30px 20px;
 }
 
 .fa-sad-tear {

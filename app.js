@@ -1,3 +1,4 @@
+// include express and model
 const express = require('express')
 const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
@@ -5,6 +6,7 @@ const Restaurant = require('./models/restaurant')
 const app = express()
 const PORT = 3000
 
+// set view templates
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
@@ -17,9 +19,11 @@ const db = mongoose.connection
 db.on('error', () => { console.error('Failed to connect to mongoDB!') })
 db.once('open', () => { console.log('The server is connected to mongoDB!') })
 
+// middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
+// routes
 app.get('/', (req, res) => {
   Restaurant.find()
     .lean()
