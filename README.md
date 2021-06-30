@@ -16,6 +16,7 @@
 * node.js : ^10.15.0
 * express: ^4.17.1
 * express-handlebars: ^5.3.2
+* mongoose: ^5.12.0
 
 <br>
 
@@ -35,7 +36,14 @@ cd restaurant-list
 ```
 npm i express express-handlebars nodemon
 ```
-4. 啟動網頁伺服器
+4. 加入種子資料
+```
+npm run seed
+```
+5. 啟動網頁伺服器
 ```
 npm run dev
 ```
+6. 出現下列訊息，表示啟動成功，可點選連結開啟網頁
+
+The server is running on http://localhost:3000
