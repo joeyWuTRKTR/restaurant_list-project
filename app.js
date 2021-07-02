@@ -52,6 +52,7 @@ app.get('/restaurants/searches', (req, res) => {
 
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
   return Restaurant.findById(id)
     .lean()
     .then((restaurant) => res.render('detail', { restaurant }))
