@@ -47,7 +47,7 @@
               </span>
 
               <div class="restaurant-button-group m-2 mx-auto">
-                <form action="/restaurants/{{ this._id }}/delete" method="POST" class="d-flex container justify-content-around align-items-center m-0 pl-0">
+                <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST" class="d-flex container justify-content-around align-items-center m-0 pl-0">
                   <a class="btn btn-info" href="/restaurants/{{ this._id }}" role="button">Detail</a>
                   <a class="btn btn-warning" href="/restaurants/{{ this._id }}/edit" role="button">Edit</a>                
                   <button type="submit" class="btn btn-danger">Delete</button>

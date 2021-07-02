@@ -63,8 +63,7 @@ app.post('/restaurants', (req, res) => {
   if (!name || !name_en || !category || !image || !location || !phone || !google_map || !rating || !description) {
     return res.redirect('/restaurants/new')
   }
-  return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description
-  })
+  return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description })
     .then(() => res.redirect('/'))
     .catch((error) => console.error(error))
 })
@@ -108,6 +107,16 @@ app.get('/restaurants/:id', (req, res) => {
     .lean()
     .then((restaurant) => res.render('detail', { restaurant }))
     .catch((error) => console.error(error))
+})
+
+// delete route
+app.delete('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
+  return Restaurant.findById(id)
+    .then((restaurant) => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.error(error))
 })
 
 app.listen(PORT, () => {
