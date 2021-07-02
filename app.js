@@ -2,6 +2,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
+const methodOverride = require('method-override')
 
 const app = express()
 const PORT = 3000
@@ -22,8 +23,9 @@ db.once('open', () => { console.log('The server is connected to mongoDB!') })
 // middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
+app.use(methodOverride('_method'))
 
-// routes
+// index route
 app.get('/', (req, res) => {
   Restaurant.find()
     .lean()
@@ -31,6 +33,7 @@ app.get('/', (req, res) => {
     .catch((error) => console.error(error))
 })
 
+// search route
 app.get('/restaurants/searches', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
   Restaurant.find()
@@ -50,6 +53,7 @@ app.get('/restaurants/searches', (req, res) => {
     .catch((error) => console.error(error))
 })
 
+// create route
 app.get('/restaurants/new', (req, res) => {
   res.render('new')
 })
@@ -65,6 +69,38 @@ app.post('/restaurants', (req, res) => {
     .catch((error) => console.error(error))
 })
 
+// edit route
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.error(error))
+})
+
+app.put('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
+  const modifiedRestaurant = req.body
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      restaurant.name = modifiedRestaurant.name
+      restaurant.name_en = modifiedRestaurant.name_en
+      restaurant.category = modifiedRestaurant.category
+      restaurant.image = modifiedRestaurant.image
+      restaurant.location = modifiedRestaurant.location
+      restaurant.phone = modifiedRestaurant.phone
+      restaurant.google_map = modifiedRestaurant.google_map
+      restaurant.rating = modifiedRestaurant.rating
+      restaurant.description = modifiedRestaurant.description
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.error(error))
+})
+
+// detail route
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
