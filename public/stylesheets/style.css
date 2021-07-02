@@ -83,6 +83,12 @@ header {
   .card img{
     height: 115px;
   }
+
+  .restaurant-button-group {
+    flex-wrap: wrap;
+    padding-right: 0;
+}
+
 }
 
 @media screen and (max-width: 768px) {
@@ -114,3 +120,4 @@ header {
   margin-right: 10px;
   color: #9b4b4b;
 }
+
