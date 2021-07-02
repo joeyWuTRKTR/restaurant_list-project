@@ -31,15 +31,7 @@ app.get('/', (req, res) => {
     .catch((error) => console.error(error))
 })
 
-app.get('/restaurants/:id', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findById(id)
-    .lean()
-    .then((restaurant) => res.render('detail', { restaurant }))
-    .catch((error) => console.error(error))
-})
-
-app.get('/search', (req, res) => {
+app.get('/restaurants/searches', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
   Restaurant.find()
     .lean()
@@ -57,6 +49,16 @@ app.get('/search', (req, res) => {
     })
     .catch((error) => console.error(error))
 })
+
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('detail', { restaurant }))
+    .catch((error) => console.error(error))
+})
+
+
 
 app.listen(PORT, () => {
   console.log(`The server is running on http://localhost:${PORT}`)
