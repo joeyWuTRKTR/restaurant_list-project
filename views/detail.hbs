@@ -38,12 +38,34 @@
         src="{{ restaurant.image }}" alt="{{ restaurant.name }}"
         style="max-width: 600px;">
       
-      <div class="restaurant-button-group m-2 mx-auto">
-        <form action="/restaurants/{{ restaurant._id }}?_method=DELETE" method="POST" class="d-flex container justify-content-around align-items-center m-0 pl-0">
-          <a class="btn btn-warning" href="/restaurants/{{ restaurant._id }}/edit" role="button">Edit</a>  
-          <a class="btn btn-primary" href="/" role="button">Back</a>              
+      <div class="restaurant-button-group m-2 mx-auto d-flex container justify-content-around align-items-center">
+        <a class="btn btn-warning" href="/restaurants/{{ restaurant._id }}/edit" role="button">Edit</a>  
+        <a class="btn btn-primary" href="/" role="button">Back</a>              
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>              
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">提示訊息</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        您確定要刪除 {{ restaurant.name }} 嗎？
+      </div>
+      <div class="modal-footer">
+        <form action="/restaurants/{{ restaurant._id }}?_method=DELETE" method="POST">
           <button type="submit" class="btn btn-danger">Delete</button>
-        </form>               
+          <button type="button" class="btn btn-primary" data-dismiss="modal">X</button>
+        </form>
       </div>
     </div>
   </div>
