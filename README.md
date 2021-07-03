@@ -3,11 +3,21 @@
 <br>
 
 此專案可以讓使用者瀏覽、搜尋特定的餐廳，並且可以點擊餐廳圖示瀏覽更詳細的餐廳資訊。
+此外，也可以新增、刪除和修改餐廳資料。
 
 <br>
 
+## 專案功能
+
+1. 使用者可以新增一家餐廳
+2. 使用者可以瀏覽一家餐廳的詳細資訊
+3. 使用者可以瀏覽全部所有餐廳
+4. 使用者可以依據餐廳名稱與類別搜尋特定餐廳
+5. 使用者可以修改一家餐廳的資訊
+6. 使用者可以刪除一家餐廳
+
 ## 畫面瀏覽
-![alphacamp 2-3 A3 作業](https://user-images.githubusercontent.com/78346513/123622455-ce8f4580-d83e-11eb-8634-9d005a0ea655.png)
+![alphacamp 2-3 A6 作業](https://user-images.githubusercontent.com/78346513/124343996-72437180-dc02-11eb-96ed-cf9f1a19155a.png)
 
 ## 建置環境
 
@@ -17,6 +27,7 @@
 * express: ^4.17.1
 * express-handlebars: ^5.3.2
 * mongoose: ^5.12.0
+* mongoDB: ^4.2.14
 
 <br>
 
@@ -34,7 +45,7 @@ cd restaurant-list
 ```
 3. 安裝套件
 ```
-npm i express express-handlebars nodemon
+npm install
 ```
 4. 加入種子資料
 ```

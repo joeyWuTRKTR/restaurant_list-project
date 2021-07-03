@@ -50,8 +50,8 @@
         </a>
         <div class="restaurant-button-group">
           <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST" class="d-flex container justify-content-end align-items-center p-0">
-            <a class="btn btn-info m-1" href="/restaurants/{{ this._id }}" role="button">Detail</a>
             <a class="btn btn-warning m-1" href="/restaurants/{{ this._id }}/edit" role="button">Edit</a>                
+            <a class="btn btn-info m-1" href="/restaurants/{{ this._id }}" role="button">Detail</a>
             <button type="submit" class="btn btn-danger m-1">Delete</button>
           </form>               
         </div>
