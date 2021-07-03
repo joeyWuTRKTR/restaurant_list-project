@@ -129,3 +129,7 @@ header {
   max-width: 500px;
   background-color: rgb(247, 248, 246);
 }
+
+.card-columns .card {
+  margin-bottom: 0;
+}
