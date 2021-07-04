@@ -40,5 +40,5 @@ app.get('/search', (req, res) => {
 
 // set listener
 app.listen(port, () => {
-  console.log('Updated!')
+  console.log(`Express is listening on https://localhost:${port}`)
 })
