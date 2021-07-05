@@ -60,7 +60,7 @@ app.get('/restaurants/new', (req, res) => {
 
 app.post('/restaurants', (req, res) => {
   const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
-  if (!name || !name_en || !category || !image || !location || !phone || !google_map || !rating || !description) {
+  if (!name || !category || !image || !location || !phone || !google_map || !rating || !description) {
     return res.redirect('/restaurants/new')
   }
   return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description })
