@@ -1,13 +1,23 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
+const sortData = require('../../config/sortData.json')
 const mongoose = require('mongoose')
 
 // search route
 router.get('/searches', (req, res) => {
-  const keyword = req.query.keyword.trim().toLowerCase()
+  const searchInput = req.query.keyword
+  const keyword = searchInput.trim().toLowerCase()
+  const currentSortOption = req.query.sortOption
+  const sortMongoose = {
+    nameEnAsc: { name_en: 'asc' },
+    nameEnDesc: { name_en: 'desc' },
+    category: { category: 'asc' },
+    location: { location: 'asc' }
+  }
   Restaurant.find()
     .lean()
+    .sort(sortMongoose[currentSortOption])
     .then((restaurants) => {
       if (keyword) {
         restaurants = restaurants.filter((restaurant) =>
@@ -18,7 +28,7 @@ router.get('/searches', (req, res) => {
         const error = '很遺憾，沒有符合搜尋的結果。'
         return res.render('index', { error })
       }
-      res.render('index', { restaurants })
+      res.render('index', { restaurants, sortData, currentSortOption, searchInput })
     })
     .catch((error) => console.error(error))
 })

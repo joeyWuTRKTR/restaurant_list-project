@@ -7,7 +7,11 @@ const app = express()
 const PORT = 3000
 
 // set view templates
-app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.engine('hbs', exphbs({
+  defaultLayout: 'main',
+  extname: '.hbs',
+  helpers: require('./controller/handlebarHelpers')
+}))
 app.set('view engine', 'hbs')
 
 // include mongoose and connect to database
