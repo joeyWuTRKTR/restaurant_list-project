@@ -15,9 +15,10 @@
 4. 使用者可以依據餐廳名稱與類別搜尋特定餐廳
 5. 使用者可以修改一家餐廳的資訊
 6. 使用者可以刪除一家餐廳
+7. 使用者可以選擇特定排序方式後，再點選搜尋鍵，搜尋餐廳
 
 ## 畫面瀏覽
-![alphacamp 2-3 A6 作業](https://user-images.githubusercontent.com/78346513/124343996-72437180-dc02-11eb-96ed-cf9f1a19155a.png)
+![alphacamp 2-3 A8 作業](https://user-images.githubusercontent.com/78346513/124761617-8f5ea400-df64-11eb-85b1-3b9be575c605.png)
 
 ## 建置環境
 
