@@ -16,7 +16,7 @@
 
       <div class="search-bar-inner col-md-6 d-flex">
         <div class="input-group align-items-end">
-          <select class="form-control" name="sortOption" id="sortOption">
+          <select class="form-control" name="sortOption" id="sortOption" onchange="submit()">
             <option value="">選擇排序方式</option>
             {{#each sortData}}
             <option value="{{this.value}}" {{#isEqual this.value ../currentSortOption}} selected {{/isEqual}}>{{this.option}}</option>
