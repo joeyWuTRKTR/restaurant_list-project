@@ -90,7 +90,7 @@ router.get('/:id', (req, res) => {
 })
 
 // delete route
-router.delete('/restaurants/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id
   if (!mongoose.Types.ObjectId.isValid(id)) return res.redirect('back')
   return Restaurant.findById(id)
