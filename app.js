@@ -2,6 +2,14 @@
 const express = require('express')
 const app = express()
 
+// include restaurant 
+const restaurant = require('./models/restaurant')
+
+// include mongoose
+const mongoose = require('mongoose')
+//connect to mongoDB
+mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
+
 // default port
 const port = 3000
 
@@ -18,8 +26,30 @@ app.set('view engine', 'handlebars')
 // set static files
 app.use(express.static('public'))
 
-// define router
+// check connection
+const db = mongoose.connection
+
+db.on('error', () => {
+  console.log('mongoDB connect error!')
+})
+
+db.once('open', () => {
+  console.log('mongoDB connected!')
+})
+
 app.get('/', (req, res) => {
+  // 將餐廳名單重新排序，根據評分由低到高/由高到低,不需排序的話就直接傳原始資料
+  if (req.query.order === 'asc' && req.query.sortBy === 'rating') {
+    restaurantList.results.sort((a, b) => {
+      // 評分由低到高
+      return a.rating - b.rating
+    })
+  } else if (req.query.order === 'desc' && req.query.sortBy === 'rating') {
+    restaurantList.results.sort((a, b) => {
+      // 評分由高到低
+      return b.rating - a.rating
+    })
+  }
   res.render('index', { restaurants: restaurantList.results })
 })
 
