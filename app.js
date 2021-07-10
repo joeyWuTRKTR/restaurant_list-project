@@ -2,8 +2,11 @@
 const express = require('express')
 const app = express()
 
+// import body-parser
+const bodyParser = require('body-parser')
+
 // include restaurant 
-const restaurant = require('./models/restaurant')
+const Restaurant = require('./models/restaurant')
 
 // include mongoose
 const mongoose = require('mongoose')
@@ -13,9 +16,6 @@ mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true,
 // default port
 const port = 3000
 
-// import restaurant list 
-const restaurantList = require('./restaurant.json')
-
 // import handlebars template engine
 const exphbs = require('express-handlebars')
 // set template engine
@@ -24,6 +24,9 @@ app.set('view engine', 'hbs')
 
 // set static files
 app.use(express.static('public'))
+
+// use body-parser
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // check connection
 const db = mongoose.connection
@@ -37,27 +40,82 @@ db.once('open', () => {
 })
 
 app.get('/', (req, res) => {
-  // 將餐廳名單重新排序，根據評分由低到高/由高到低,不需排序的話就直接傳原始資料
-  if (req.query.order === 'asc' && req.query.sortBy === 'rating') {
-    restaurantList.results.sort((a, b) => {
-      // 評分由低到高
-      return a.rating - b.rating
+  Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      // 將餐廳名單重新排序，根據評分由低到高/由高到低,不需排序的話就直接傳原始資料
+      if (req.query.order === 'asc' && req.query.sortBy === 'rating') {
+        restaurants.sort((a, b) => {
+          // 評分由低到高
+          return a.rating - b.rating
+        })
+      } else if (req.query.order === 'desc' && req.query.sortBy === 'rating') {
+        restaurants.sort((a, b) => {
+          // 評分由高到低
+          return b.rating - a.rating
+        })
+      }
+      res.render('index', { restaurants })
     })
-  } else if (req.query.order === 'desc' && req.query.sortBy === 'rating') {
-    restaurantList.results.sort((a, b) => {
-      // 評分由高到低
-      return b.rating - a.rating
-    })
-  }
-  res.render('index', { restaurants: restaurantList.results })
+    .catch(error => console.log(error))
 })
 
-// define show router
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  console.log(restaurant)
-  res.render('show', { restaurant: restaurant })
+// Create
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
 })
+
+app.post('/restaurants', (req, res) => {
+  const { 
+    name,
+    name_en,
+    category,
+    image,
+    location,
+    phone,
+    google_map,
+    rating,
+    description,
+  } = req.body
+
+  // if ( 
+  //   !name ||
+  //   !category ||
+  //   !image ||
+  //   !location ||
+  //   !phone ||
+  //   !google_map ||
+  //   !rating ||
+  //   !description
+  // ) {
+  //   return res.redirect('/restaurants/new')
+  // }
+  return Restaurant.create({
+    name,
+    name_en,
+    category,
+    image,
+    location,
+    phone,
+    google_map,
+    rating,
+    description,
+  })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+// Read
+app.get('/restaurants/restaurant/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurant => res.render('detail', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+// Update
+
+// Delete
 
 // search router
 app.get('/search', (req, res) => {

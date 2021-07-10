@@ -11,7 +11,6 @@ const restaurantSchema = new Schema({
 
   name_en: {
     type: String,
-    required: true
   },
 
   category: {
@@ -26,17 +25,14 @@ const restaurantSchema = new Schema({
 
   location: {
     type: String,
-    required: true,
   },
 
   phone: {
     type: String,
-    required: true
   },
   
   google_map: {
     type: String,
-    required: true
   },
   
   rating: {
@@ -46,7 +42,6 @@ const restaurantSchema = new Schema({
 
   description: {
     type: String,
-    required: true
   }
 })
 // export module

@@ -42,6 +42,8 @@
         </div>
       </div>
       {{/unless}}
+
+      <a href="./restaurants/new">Create</a>
       
     </div>
   </div>
@@ -57,7 +59,6 @@
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
         {{#each restaurants}}
-        <a href="/restaurants/{{this.id}}" class="text-secondary">
           <div class="card mb-3">
             <img class="card-img-top" src="{{this.image}}"
               alt="{{this.name}}">
@@ -73,9 +74,12 @@
                 <i class="fas fa-star fa-xs"></i>
               </span>
 
+              <div class="RUD">
+                <a href="./restaurants/restaurant/{{this._id}}">detail</a>
+              </div>
+
             </div>
           </div>
-        </a>
         {{/each}}
       </div>
     </div>
