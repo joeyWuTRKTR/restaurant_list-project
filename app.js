@@ -115,6 +115,8 @@ app.get('/restaurants/restaurant/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+
+
 // Update
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
