@@ -165,11 +165,30 @@ app.post('/restaurants/:id/delete', (req, res) => {
 })
 
 // search router
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  const restaurants = restaurantList.results.filter(restaurant => restaurant.name.toLowerCase().includes(keyword.toLowerCase()))
-  res.render('index', { restaurants: restaurants, keyword: keyword })
-})
+app.get('/restaurants/search', (req, res) => {
+  const keyword = req.query.keyword.trim().toLowerCase()
+  // if input space, length = 0, invalid input
+  if(keyword <= 0) {
+    return res.redirect('/')
+  }
+  Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      if(restaurants.length >= 0) {
+        // if restaurant or category matches, render index 
+        restaurants = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword) || restaurant.category.includes(keyword))
+        return res.render('index', {
+          restaurants, keyword: req.query.keyword.trim()
+        })
+      } else { // if no result matches, render no_result
+        res.render('index', {
+          keyword: req.query.keyword,
+          no_result: `<h3>No results, please search another restaurant </h3>`
+        })
+      }
+    })
+    .catch(error => console.log(error))
+  })
 
 
 // set listener
