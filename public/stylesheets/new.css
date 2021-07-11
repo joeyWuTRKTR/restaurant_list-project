@@ -1,0 +1,26 @@
+
+.header {
+  border-bottom: 2px solid black;
+  padding-bottom: 15px;
+  color: #4592af;
+}
+
+.banner {
+  position: relative;
+  z-index: -1;
+  margin: -5px;
+  height: 200px;
+  background: #dddddd center center url('https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg');
+  background-size: cover;
+  filter: blur(3px);
+}
+
+.container i {
+  text-align: right;
+}
+
+.back-button {
+  height: 30px;
+  width: 30px;
+  border: 3px solid black;
+}

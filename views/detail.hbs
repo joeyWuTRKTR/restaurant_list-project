@@ -55,11 +55,11 @@
         src="{{restaurant.image}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
 
-      <a href="/">Back</a>
-      <a href="/restaurants/{{restaurant._id}}/edit">edit</a>
+      <a class="btn btn-warning" href="/restaurants/{{restaurant._id}}/edit" role="button">edit</a>
       <form action="/restaurants/{{restaurant._id}}/delete" method="POST" style="display: inline;">
-        <button type="submit">delete</button>
+        <button class="btn btn-danger" type="submit">delete</button>
       </form>
+      <a class="btn btn-basic" href="/" role="button">Back</a>
     </div>
   </div>
 </div>

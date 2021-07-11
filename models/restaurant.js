@@ -18,20 +18,24 @@ const restaurantSchema = new Schema({
     required: true
   },
 
-  image: {
+  image_url: {
     type: String,
+    required: true
   },
 
   location: {
     type: String,
+    required: true
   },
 
   phone: {
     type: String,
+    required: true
   },
   
   google_map: {
     type: String,
+    required: true
   },
   
   rating: {
@@ -41,6 +45,7 @@ const restaurantSchema = new Schema({
 
   description: {
     type: String,
+    required: true
   }
 })
 // export module

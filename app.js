@@ -70,31 +70,32 @@ app.post('/restaurants', (req, res) => {
     name,
     name_en,
     category,
-    image,
+    image_url,
     location,
     phone,
     google_map,
     rating,
     description,
   } = req.body
+  // check whether contains the needs
+  if ( 
+    !name ||
+    !category ||
+    !image_url ||
+    !location ||
+    !phone ||
+    !google_map ||
+    !rating ||
+    !description
+  ) {
+    return res.redirect('/restaurants/new')
+  }
 
-  // if ( 
-  //   !name ||
-  //   !category ||
-  //   !image ||
-  //   !location ||
-  //   !phone ||
-  //   !google_map ||
-  //   !rating ||
-  //   !description
-  // ) {
-  //   return res.redirect('/restaurants/new')
-  // }
   return Restaurant.create({
     name,
     name_en,
     category,
-    image,
+    image_url,
     location,
     phone,
     google_map,
