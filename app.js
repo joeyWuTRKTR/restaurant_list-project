@@ -4,6 +4,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 // import handlebars template engine
 const exphbs = require('express-handlebars')
+// import method-override
+const methodOverride = require('method-override')
 
 // include restaurant 
 const Restaurant = require('./models/restaurant')
@@ -25,6 +27,8 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 // use body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
+// use method override
+app.use(methodOverride('_method'))
 // use routes
 app.use(routes)
 

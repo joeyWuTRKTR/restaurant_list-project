@@ -64,7 +64,7 @@ router.get('/restaurant/:id', (req, res) => {
 
 
 // Update
-router.get('/:id/edit', (req, res) => {
+router.get('/:id', (req, res) => {
   const id = req.params.id
   console.log(id)
   return Restaurant.findById(id)
@@ -73,7 +73,7 @@ router.get('/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.post('/:id/edit', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id
   const {
     name,
@@ -104,7 +104,7 @@ router.post('/:id/edit', (req, res) => {
 })
 
 // Delete
-router.post('/:id/delete', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
