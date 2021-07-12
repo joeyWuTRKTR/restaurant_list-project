@@ -6,11 +6,11 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
 // Create
-router.get('/restaurants/new', (req, res) => {
+router.get('/new', (req, res) => {
   return res.render('new')
 })
 
-router.post('/restaurants', (req, res) => {
+router.post('/', (req, res) => {
   const {
     name,
     name_en,
@@ -33,7 +33,7 @@ router.post('/restaurants', (req, res) => {
     !rating ||
     !description
   ) {
-    return res.redirect('/restaurants/new')
+    return res.redirect('/new')
   }
 
   return Restaurant.create({
@@ -52,7 +52,7 @@ router.post('/restaurants', (req, res) => {
 })
 
 // Read
-router.get('/restaurants/restaurant/:id', (req, res) => {
+router.get('/restaurant/:id', (req, res) => {
   const id = req.params.id
   console.log(id)
   return Restaurant.findById(id)
@@ -64,7 +64,7 @@ router.get('/restaurants/restaurant/:id', (req, res) => {
 
 
 // Update
-router.get('/restaurants/:id/edit', (req, res) => {
+router.get('/:id/edit', (req, res) => {
   const id = req.params.id
   console.log(id)
   return Restaurant.findById(id)
@@ -73,7 +73,7 @@ router.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.post('/restaurants/:id/edit', (req, res) => {
+router.post('/:id/edit', (req, res) => {
   const id = req.params.id
   const {
     name,
@@ -104,7 +104,7 @@ router.post('/restaurants/:id/edit', (req, res) => {
 })
 
 // Delete
-router.post('/restaurants/:id/delete', (req, res) => {
+router.post('/:id/delete', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
@@ -113,7 +113,7 @@ router.post('/restaurants/:id/delete', (req, res) => {
 })
 
 // search router
-router.get('/restaurants/search', (req, res) => {
+router.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
   // if input space, length = 0, invalid input
   if (keyword <= 0) {
