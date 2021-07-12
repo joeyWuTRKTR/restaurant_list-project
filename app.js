@@ -7,11 +7,8 @@ const bodyParser = require('body-parser')
 
 // include restaurant 
 const Restaurant = require('./models/restaurant')
-
 // include mongoose
-const mongoose = require('mongoose')
-//connect to mongoDB
-mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
+require('./config/mongoose')
 
 // default port
 const port = 3000
@@ -27,17 +24,6 @@ app.use(express.static('public'))
 
 // use body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
-
-// check connection
-const db = mongoose.connection
-
-db.on('error', () => {
-  console.log('mongoDB connect error!')
-})
-
-db.once('open', () => {
-  console.log('mongoDB connected!')
-})
 
 app.get('/', (req, res) => {
   Restaurant.find()
