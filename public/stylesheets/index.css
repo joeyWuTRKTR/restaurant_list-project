@@ -1,3 +1,4 @@
+
 header {
   overflow: hidden;
 }
@@ -24,6 +25,7 @@ header {
   filter: blur(3px);
 }
 
+
 .search-bar .search-bar-outer {
   margin: 0 auto;
   max-width: 680px;
@@ -33,6 +35,31 @@ header {
   border: 0;
   margin-top: -60px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.searchContainer {
+  display: inline;
+  text-align: center;
+}
+
+.input-group i {
+  display: absolute;
+}
+
+.input-group {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.icon {
+  padding: 10px;
+  min-width: 40px;
 }
 
 .search-bar .search-bar-inner h4 {
@@ -53,6 +80,7 @@ header {
   box-shadow: none;
   border-color: #ced4da;
 }
+
 
 .card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);

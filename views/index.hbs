@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="/stylesheets/index.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+  integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 <header>
   <!-- navigation -->
   <nav class="navbar navbar-light bg-light">
@@ -20,11 +22,14 @@
     <div class="search-bar-inner">
       <form action="/restaurants/search">
         <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類......" aria-label="Restaurant Name..."
-            value="{{keyword}}" aria-describedby="search-button">
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+        <div class="searchContainer">
+          <div class="input-group">
+            <i class="fas fa-search fa-lg icon"></i>
+            <input type="text" name="keyword" class="form-control input-field" placeholder="輸入餐廳、分類......" aria-label="Restaurant Name..."
+              value="{{keyword}}" aria-describedby="search-button">
+            <div class="input-group-append">
+              <button class="btn btn-major" type="submit" id="search-button">Search</button>
+            </div>
           </div>
         </div>
       </form>
@@ -82,7 +87,6 @@
                   <button class="btn btn-danger btn-sm" type="submit">delete</button>
                 </form>
               </div>
-
             </div>
           </div>
         {{/each}}
