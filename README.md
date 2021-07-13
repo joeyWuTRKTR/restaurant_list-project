@@ -26,5 +26,5 @@
 ``` npm run seed```
 5. 啟動專案  
 ```npm run dev```
-6. 終端機出現以下訊息後，即可在http://localhost:3000使用
-  ```Express is listening on https://localhost:3000```
+6. 終端機出現以下訊息後，即可在http://localhost:3000使用  
+```Express is listening on https://localhost:3000```
