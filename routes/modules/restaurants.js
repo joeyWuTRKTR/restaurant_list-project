@@ -1,9 +1,49 @@
 // include express router
 const express = require('express')
 const router = express.Router()
+const sortType = require('../../config/sortType.json')
 
 // include restaurant 
 const Restaurant = require('../../models/restaurant')
+
+// search router
+router.get('/search', (req, res) => {
+  const keyword = req.query.keyword.trim().toLowerCase()
+  const currentSortOption = req.query.sortOption
+  console.log(currentSortOption)
+  const sortMongoose = {
+    nameEnAsc: { name_en: 'asc' },
+    nameEnDesc: { name_en: 'desc' },
+    category: { category: 'asc' },
+    location: { location: 'asc' }
+  }
+  console.log(sortMongoose[currentSortOption])
+  // if (keyword <= 0) {
+  //   return res.redirect('/')
+  // }
+  Restaurant.find()
+    .lean()
+    .sort(sortMongoose[currentSortOption])
+    .then(restaurants => {
+      if (keyword) {
+        restaurants = restaurants.filter(restaurant => 
+          restaurant.name.toLowerCase().includes(keyword) || 
+          restaurant.category.includes(keyword))
+      } 
+      
+      if (restaurants.length === 0) {
+        return res.render('index', { no_result: `<h3> 搜尋不到此餐廳，請換一家搜尋 </h3>` })
+      }
+
+      res.render('index', {
+        restaurants,
+        keyword: req.query.keyword.trim(),
+        sortType,
+        currentSortOption
+      })
+    })
+    .catch(error => console.log(error))
+})
 
 // Create
 router.get('/new', (req, res) => {
@@ -109,32 +149,6 @@ router.delete('/:id', (req, res) => {
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
-
-// search router
-router.get('/search', (req, res) => {
-  const keyword = req.query.keyword.trim().toLowerCase()
-  // if input space, length = 0, invalid input
-  if (keyword <= 0) {
-    return res.redirect('/')
-  }
-  Restaurant.find()
-    .lean()
-    .then(restaurants => {
-      if (restaurants.length >= 0) {
-        // if restaurant or category matches, render index 
-        restaurants = restaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword) || restaurant.category.includes(keyword))
-        return res.render('index', {
-          restaurants, keyword: req.query.keyword.trim()
-        })
-      } else { // if no result matches, render no_result
-        res.render('index', {
-          keyword: req.query.keyword,
-          no_result: `<h3>No results, please search another restaurant </h3>`
-        })
-      }
-    })
     .catch(error => console.log(error))
 })
 

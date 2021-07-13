@@ -1,0 +1,21 @@
+{
+  "nameEnAsc": {
+    "value": "nameEnAsc",
+    "option": "A -> Z"
+  },
+  
+  "nameEnDesc": {
+    "value": "nameEnDesc",
+    "option": "Z -> A"
+  },
+
+  "category": {
+    "value": "category",
+    "option": "料理類別"
+  },
+
+  "location": {
+    "value": "location",
+    "option": "餐廳地區"
+  }
+}

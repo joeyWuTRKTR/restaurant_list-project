@@ -20,7 +20,12 @@ const app = express()
 const port = 3000
 
 // set template engine
-app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.engine('hbs', exphbs({ 
+  defaultLayout: 'main', 
+  extname: '.hbs',
+  helpers: require('./controller/handlebarHelpers') 
+}))
+
 app.set('view engine', 'hbs')
 
 // set static files

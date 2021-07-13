@@ -17,53 +17,49 @@
 </header>
 
 <!-- search bar -->
-<div class="container search-bar">
-  <div class="search-bar-outer">
-    <div class="search-bar-inner">
-      <form action="/restaurants/search">
+<div class="container search-bar pb-3">
+  <div class="search-bar-outer pt-3">
+    <form action="/restaurants/search" class="d-flex justify-content-between">
+    
+      <div class="search-bar-inner">
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="searchContainer">
           <div class="input-group">
-            <i class="fas fa-search fa-lg icon"></i>
             <input type="text" name="keyword" class="form-control input-field" placeholder="輸入餐廳、分類......" aria-label="Restaurant Name..."
               value="{{keyword}}" aria-describedby="search-button">
             <div class="input-group-append">
-              <button class="btn btn-major" type="submit" id="search-button">Search</button>
+              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search fa-lg icon"></i></button>
             </div>
           </div>
         </div>
-      </form>
+      </div>
 
-      {{!-- sort排序器 如果沒有關鍵字路由就有篩選評分按鈕--}}
-      {{#unless keyword}}
-      <div class="d-flex justify-content-start mt-3 dropdown">
-        <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          評分
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/?order=desc&sortBy=rating">由高到低</a>
-          <a class="dropdown-item" href="/?order=asc&sortBy=rating">由低到高</a>
+      <!-- drop-down search -->
+      <div class="search-bar-inner">
+        <div class="input-group dropdown">
+          <select class="form-control" name="sortOption" id="sortOption" onchange="submit()">
+            <option value="">選擇排序方式</option>
+            {{#each sortType}}
+            <option value="{{this.value}}" {{#isEqual this.value ../currentSortOption}} selected {{/isEqual}}>{{this.option}}
+            </option>
+            {{/each}}
+          </select>
         </div>
       </div>
-      {{/unless}}
-      
-    </div>
-  </div>
-</div>
 
-<div class="d-flex justify-content-center mt-4">
-  <p>顯示 {{restaurants.length}} 筆資料</p>
+    </form>
+  </div>
 </div>
 
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
 
-    {{{ no_result }}}
+    {{{no_result}}}
 
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
+
         {{#each restaurants}}
           <div class="card mb-3">
             <img class="card-img-top" src="{{this.image_url}}"
@@ -93,4 +89,10 @@
       </div>
     </div>
   </div>
+</div>
+
+
+{{!-- shoe restaurants number --}}
+<div class="d-flex justify-content-center mt-4">
+  <p>顯示 {{restaurants.length}} 筆資料</p>
 </div>
