@@ -7,6 +7,7 @@
 * 使用者可以點選任一餐廳，查看詳細資訊，如：餐廳類別、地址、電話、餐廳介紹、圖片
 * 使用者可以使用搜尋功能，模糊搜尋中文、英文(不區分大小寫)
 * 使用者可以新增、瀏覽、修改、刪除餐廳資訊
+* 使用者可以選擇分類的方式，如A-Z、Z-A、地點、美食分類
 
 ## Environment - 環境建置
 * 開發環境: VS Code 
@@ -25,6 +26,6 @@
 4. 載入種子資料  
 ``` npm run seed```
 5. 啟動專案  
-    ```npm run dev```
+```npm run dev```
 6. 終端機出現以下訊息後，即可在http://localhost:3000使用
-    Express is listening on https://localhost:3000
+```Express is listening on https://localhost:3000```
