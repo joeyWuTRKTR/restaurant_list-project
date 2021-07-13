@@ -16,13 +16,15 @@
 * 實用套件: Nodemon
 
 ## Installation - 專案安裝
-1. 在終端機輸入指令clone專案到本機電腦
+1. 在終端機輸入指令clone專案到本機電腦  
 ```git clone https://github.com/joeyWuTRKTR/restaurant_list-project.git```
-2. 進入專案目錄
+2. 進入專案目錄  
 ```cd restaurant_list```
-3. 安裝相關套件
+3. 安裝相關套件  
 ```npm install```
-4. 啟動專案
+4. 載入種子資料  
+``` npm run seed```
+5. 啟動專案  
 ```npm run dev```
-5. 終端機出現以下訊息後，即可在http://localhost:3000使用
-```Express is listening on https://localhost:3000```
+6. 終端機出現以下訊息後，即可在http://localhost:3000使用
+  ```Express is listening on https://localhost:3000```
