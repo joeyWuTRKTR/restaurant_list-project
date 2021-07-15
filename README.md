@@ -7,6 +7,7 @@
 * 使用者可以點選任一餐廳，查看詳細資訊，如：餐廳類別、地址、電話、餐廳介紹、圖片
 * 使用者可以使用搜尋功能，模糊搜尋中文、英文(不區分大小寫)
 * 使用者可以新增、瀏覽、修改、刪除餐廳資訊
+* 使用者可以選擇分類的方式，如A-Z、Z-A、地點、美食分類
 
 ## Environment - 環境建置
 * 開發環境: VS Code 
@@ -16,13 +17,15 @@
 * 實用套件: Nodemon
 
 ## Installation - 專案安裝
-1. 在終端機輸入指令clone專案到本機電腦
+1. 在終端機輸入指令clone專案到本機電腦  
 ```git clone https://github.com/joeyWuTRKTR/restaurant_list-project.git```
-2. 進入專案目錄
+2. 進入專案目錄  
 ```cd restaurant_list```
-3. 安裝相關套件
+3. 安裝相關套件  
 ```npm install```
-4. 啟動專案
+4. 載入種子資料  
+``` npm run seed```
+5. 啟動專案  
 ```npm run dev```
-5. 終端機出現以下訊息後，即可在http://localhost:3000使用
+6. 終端機出現以下訊息後，即可在http://localhost:3000使用  
 ```Express is listening on https://localhost:3000```
