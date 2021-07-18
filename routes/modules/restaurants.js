@@ -6,18 +6,15 @@ const sortType = require('../../config/sortType.json')
 // include restaurant 
 const Restaurant = require('../../models/restaurant')
 
-
 // search router
 router.get('/search', (req, res) => {
   const keyword = new RegExp(req.query.keyword.trim(), 'i')
 
-  const currentSortOption = req.query.sortOption
-  console.log(currentSortOption)
-  //console.log(sortType[currentSortOption].mongoose)
+  let currentSortOption = req.query.sortOption
 
   Restaurant.find({ $or: [{ name: keyword}, { category: keyword }] })
     .lean()
-    //.sort(sortType[currentSortOption].mongoose)
+    .sort(sortType[currentSortOption].mongoose)
     .then(restaurants => {
       if (restaurants.length > 0) {
         res.render('index', {

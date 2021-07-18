@@ -1,4 +1,10 @@
 {
+  "default": {
+    "value": "default",
+    "option": "請選擇排序方式",
+    "mongoose": { "_id": "asc" }
+  }
+  ,
   "nameEnAsc": {
     "value": "nameEnAsc",
     "option": "A -> Z",
