@@ -1,21 +1,25 @@
 {
   "nameEnAsc": {
     "value": "nameEnAsc",
-    "option": "A -> Z"
+    "option": "A -> Z",
+    "mongoose": { "name_en": "asc" }
   },
   
   "nameEnDesc": {
     "value": "nameEnDesc",
-    "option": "Z -> A"
+    "option": "Z -> A",
+    "mongoose": { "name_en": "desc" }
   },
 
   "category": {
     "value": "category",
-    "option": "料理類別"
+    "option": "料理類別",
+    "mongoose": { "category": "asc" }
   },
 
   "location": {
     "value": "location",
-    "option": "餐廳地區"
+    "option": "餐廳地區",
+    "mongoose": { "location": "asc" }
   }
 }

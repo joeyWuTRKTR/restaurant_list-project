@@ -20,13 +20,12 @@
 <div class="container search-bar pb-3">
   <div class="search-bar-outer pt-3">
     <form action="/restaurants/search" class="d-flex justify-content-between">
-    
       <div class="search-bar-inner">
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="searchContainer">
           <div class="input-group">
             <input type="text" name="keyword" class="form-control input-field" placeholder="輸入餐廳、分類......" aria-label="Restaurant Name..."
-              value="{{keyword}}" aria-describedby="search-button">
+              value="{{ keyword }}" aria-describedby="search-button" value="{{ }}">
             <div class="input-group-append">
               <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search fa-lg icon"></i></button>
             </div>
@@ -40,8 +39,7 @@
           <select class="form-control" name="sortOption" id="sortOption" onchange="submit()">
             <option value="">選擇排序方式</option>
             {{#each sortType}}
-            <option value="{{this.value}}" {{#isEqual this.value ../currentSortOption}} selected {{/isEqual}}>{{this.option}}
-            </option>
+            <option value="{{this.value}}" {{#isEqual this.value ../currentSortOption}} selected {{/isEqual}}>{{this.option}}</option>
             {{/each}}
           </select>
         </div>
@@ -55,7 +53,7 @@
 <div class="container mt-5">
   <div class="row">
 
-    {{{no_result}}}
+    {{{ no_result }}}
 
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">

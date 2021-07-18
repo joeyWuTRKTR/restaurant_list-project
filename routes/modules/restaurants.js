@@ -6,43 +6,30 @@ const sortType = require('../../config/sortType.json')
 // include restaurant 
 const Restaurant = require('../../models/restaurant')
 
+
 // search router
 router.get('/search', (req, res) => {
-  const keyword = req.query.keyword.trim().toLowerCase()
+  const keyword = new RegExp(req.query.keyword.trim(), 'i')
+
   const currentSortOption = req.query.sortOption
   console.log(currentSortOption)
-  const sortMongoose = {
-    nameEnAsc: { name_en: 'asc' },
-    nameEnDesc: { name_en: 'desc' },
-    category: { category: 'asc' },
-    location: { location: 'asc' }
-  }
-  console.log(sortMongoose[currentSortOption])
-  // if (keyword <= 0) {
-  //   return res.redirect('/')
-  // }
-  Restaurant.find()
-    .lean()
-    .sort(sortMongoose[currentSortOption])
-    .then(restaurants => {
-      if (keyword) {
-        restaurants = restaurants.filter(restaurant => 
-          restaurant.name.toLowerCase().includes(keyword) || 
-          restaurant.category.includes(keyword))
-      } 
-      
-      if (restaurants.length === 0) {
-        return res.render('index', { no_result: `<h3> 搜尋不到此餐廳，請換一家搜尋 </h3>` })
-      }
+  //console.log(sortType[currentSortOption].mongoose)
 
-      res.render('index', {
-        restaurants,
-        keyword: req.query.keyword.trim(),
-        sortType,
-        currentSortOption
-      })
+  Restaurant.find({ $or: [{ name: keyword}, { category: keyword }] })
+    .lean()
+    //.sort(sortType[currentSortOption].mongoose)
+    .then(restaurants => {
+      if (restaurants.length > 0) {
+        res.render('index', {
+          restaurants,
+          keyword: req.query.keyword.trim(),
+          sortType,
+          currentSortOption
+        })
+      } else {
+        res.render('index', { no_result: `<h3>Couldn't fine the restaurant, try another one!</h3>` })
+      }
     })
-    .catch(error => console.log(error))
 })
 
 // Create
@@ -128,15 +115,16 @@ router.put('/:id', (req, res) => {
   } = req.body
   return Restaurant.findById(id)
     .then(restaurant => {
-      restaurant.name = name,
-        restaurant.name_en = name_en,
-        restaurant.category = category,
-        restaurant.image = image,
-        restaurant.location = location,
-        restaurant.phone = phone,
-        restaurant.google_map = google_map,
-        restaurant.rating = rating,
-        restaurant.description = description
+      Object.assign(restaurant, req.body)
+      // restaurant.name = name,
+    //   restaurant.name_en = name_en,
+    //   restaurant.category = category,
+    //   restaurant.image = image,
+    //   restaurant.location = location,
+    //   restaurant.phone = phone,
+    //   restaurant.google_map = google_map,
+    //   restaurant.rating = rating,
+    //   restaurant.description = description
       return restaurant.save()
     })
     .then(restaurant => res.redirect(`/restaurants/restaurant/${restaurant._id}`))
