@@ -8,6 +8,7 @@ router.get('/register', (req, res) => {
 
 // 2. 註冊完成
 
+
 // 3. 導入登入頁
 router.get('/login', (req, res) => {
   res.render('login')
