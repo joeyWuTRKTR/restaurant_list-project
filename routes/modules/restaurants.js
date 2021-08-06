@@ -8,7 +8,7 @@ const Restaurant = require('../../models/restaurant')
 
 // search router
 router.get('/search', (req, res) => {
-  const keyword = new RegExp(req.query.keyword.trim(), 'i')
+  const keyword = new RegExp(req.query.keyword.trim(), 'i') // case-insensitive
 
   let currentSortOption = req.query.sortOption
 
@@ -112,16 +112,7 @@ router.put('/:id', (req, res) => {
   } = req.body
   return Restaurant.findById(id)
     .then(restaurant => {
-      Object.assign(restaurant, req.body)
-      // restaurant.name = name,
-    //   restaurant.name_en = name_en,
-    //   restaurant.category = category,
-    //   restaurant.image = image,
-    //   restaurant.location = location,
-    //   restaurant.phone = phone,
-    //   restaurant.google_map = google_map,
-    //   restaurant.rating = rating,
-    //   restaurant.description = description
+      Object.assign(restaurant, req.body) // 只修改新增的部分，舊的沿用，同時全部併入目標物件(restaurant)
       return restaurant.save()
     })
     .then(restaurant => res.redirect(`/restaurants/restaurant/${restaurant._id}`))
