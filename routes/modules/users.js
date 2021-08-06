@@ -11,6 +11,7 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   const { user , email, password } = req.body
   console.log(user, email, password)
+  res.render('/')
 })
 
 
@@ -20,6 +21,10 @@ router.get('/login', (req, res) => {
 })
 
 // 4. 登入完成，導入餐廳頁面
+router.post('/login', (req, res) => {
+  const { email, password } = req.body
+  console.log(email, password)
+})
 
 // 5. 登出
 
