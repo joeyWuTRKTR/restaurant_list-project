@@ -14,6 +14,8 @@ require('dotenv').config()
 const Restaurant = require('./models/restaurant')
 // include routes
 const routes = require('./routes')
+
+const usePassport = require('./config/passport')
 // include mongoose
 require('./config/mongoose')
 
@@ -42,6 +44,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+
+usePassport(app)
+
 // use routes
 app.use(routes)
 

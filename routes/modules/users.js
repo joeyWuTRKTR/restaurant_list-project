@@ -1,4 +1,5 @@
 const express = require('express')
+const passport = require('passport')
 const router = express.Router()
 const User = require('../../models/user')
 
@@ -38,10 +39,10 @@ router.get('/login', (req, res) => {
 })
 
 // 4. 登入完成，導入餐廳頁面
-router.post('/login', (req, res) => {
-  const { email, password } = req.body
-  console.log(email, password)
-})
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/users/login'
+}))
 
 // 5. 登出
 
