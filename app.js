@@ -6,6 +6,9 @@ const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
 // import method-override
 const methodOverride = require('method-override')
+const session = require('express-session')
+
+require('dotenv').config()
 
 // include restaurant 
 const Restaurant = require('./models/restaurant')
@@ -34,6 +37,11 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 // use method override
 app.use(methodOverride('_method'))
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}))
 // use routes
 app.use(routes)
 
