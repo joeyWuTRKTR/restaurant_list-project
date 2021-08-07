@@ -9,6 +9,25 @@
   <link rel="stylesheet" href="/stylesheets/bootstrap.css">
 </head>
 <body>
+  <header>
+    <!-- navigation -->
+    <nav class="navbar navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
+            width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
+          {{#if isAuthenticated}}{{ user.name }}'s {{/if}}餐廳清單
+        </a>
+        {{#if isAuthenticated}}
+        <a href="./users/logout" class="btn btn-outline-dark">Logout</a>
+        {{else}}
+        <a href="./users/login" class="btn btn-outline-dark">Login</a>
+        {{/if}}
+      </div>
+    </nav>
+    <div class="banner"></div>
+  </header>
+
   {{{body}}}
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

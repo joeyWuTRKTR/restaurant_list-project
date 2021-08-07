@@ -1,20 +1,6 @@
 <link rel="stylesheet" href="/stylesheets/index.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
   integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-<header>
-  <!-- navigation -->
-  <nav class="navbar navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="/">
-        <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
-          width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
-        我的餐廳清單
-      </a>
-      <a class="navbar-brand" href="./restaurants/new">新增餐廳資訊</a>
-    </div>
-  </nav>
-  <div class="banner"></div>
-</header>
 
 <!-- search bar -->
 <div class="container search-bar pb-3">
@@ -54,10 +40,9 @@
   <div class="row">
 
     {{{ no_result }}}
-
+    <a class="restaurant-create" href="./restaurants/new">新增餐廳資訊</a>
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
-
         {{#each restaurants}}
           <div class="card mb-3">
             <img class="card-img-top" src="{{this.image_url}}"
