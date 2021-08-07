@@ -46,6 +46,13 @@ const restaurantSchema = new Schema({
   description: {
     type: String,
     required: true
+  },
+  // 關聯設定: 參照User 的 ObjectId
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
+    required: true
   }
 })
 // export module

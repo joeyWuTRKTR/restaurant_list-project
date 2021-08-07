@@ -1,19 +1,4 @@
 <link rel="stylesheet" href="/stylesheets/show.css">
-<header>
-  <!-- navigation -->
-  <nav class="navbar navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="/">
-        <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
-          width="30" height="30" class="d-inline-block align-top" alt="好。吃">
-        我的餐廳清單
-      </a>
-      <a class="navbar-brand" href="/restaurants/new">新增餐廳資訊</a>
-    </div>
-  </nav>
-
-  <div class="banner"></div>
-</header>
 
 <h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
 <div class="container">
@@ -54,12 +39,13 @@
       <img class="rounded mx-auto d-block mb-4 w-100"
         src="{{restaurant.image_url}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
-
-      <a class="btn btn-warning" href="/restaurants/{{restaurant._id}}" role="button">edit</a>
-      <form action="/restaurants/{{restaurant._id}}?_method=DELETE" method="POST" style="display: inline;">
-        <button class="btn btn-danger" type="submit">delete</button>
-      </form>
-      <a class="btn btn-basic" href="/" role="button">Back</a>
+      <div class="buttons mb-3">
+        <a class="btn btn-warning" href="/restaurants/{{restaurant._id}}" role="button">edit</a>
+        <form action="/restaurants/{{restaurant._id}}?_method=DELETE" method="POST" style="display: inline;">
+          <button class="btn btn-danger" type="submit">delete</button>
+        </form>
+        <a class="btn btn-basic" href="/" role="button">Back</a>
+      </div>
     </div>
   </div>
 </div>
