@@ -13,7 +13,7 @@ router.post('/register', (req, res) => {
   const { name , email, password, passwordConfirm } = req.body
   const errors = []
   // 欄位輸入錯誤
-  if (!name || !email || !password || passwordConfirm) {
+  if (!name || !email || !password || !passwordConfirm) {
     errors.push({ message: '欄位填寫錯誤。' })
   }
   // 密碼和驗證密碼不一致

@@ -18,7 +18,7 @@ const restaurantSchema = new Schema({
     required: true
   },
 
-  image_url: {
+  image: {
     type: String,
     required: true
   },
