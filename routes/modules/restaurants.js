@@ -11,11 +11,11 @@ router.get('/search', (req, res) => {
   const keyword = new RegExp(req.query.keyword.trim(), 'i') // case-insensitive
   let currentSortOption = req.query.sortOption
 
-  Restaurant.find({ $or: [{ name: keyword}, { category: keyword }] })
+  Restaurant.find({ $or: [{ name: keyword}, { category: keyword }], userId: req.user._id })
     .lean()
     .sort(sortType[currentSortOption].mongoose)
     .then(restaurants => {
-      if (restaurants.length > 0 && restaurants.userId === _id) {
+      if (restaurants.length > 0) {
         res.render('index', {
           restaurants,
           keyword: req.query.keyword.trim(),

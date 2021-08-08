@@ -1,24 +1,25 @@
+<link rel="stylesheet" href="/stylesheets/style.css">
+
 <div class="row">
-  <div class="col-md-6 mx-auto">
-    <h3>Login Page</h3>
-    <div class="card mt-3">
+  <div class="col-md-6 mx-auto mt-5" style="max-width: 600px">
+    <div class="card card-body" style="background-color: #F5F5F5;">
+      <h3 class="text-center">Login Page</h3>
       {{> message}}
       <form action="/users/login" method="POST">
-
-        <div class="form-control row">
-          <label class="col-auto col-md-6" for="email">email:</label>
-          <input class="col-auto col-md-6" type="email" id="email" name="email" placeholder="abc@1234">
+        <div class="form-group row">
+          <label class="col-auto col-md-3 font-weight-bold" for="email">email:</label>
+          <input class="col-auto col-md-9 form-control" type="email" id="email" name="email" placeholder="abc@1234">
         </div>
         
-        <div class="form-control row">
-          <label class="col-auto col-md-6" for="password">password:</label>
-          <input class="col-auto col-md-6" type="password" id="password" name="password" placeholder="password">
+        <div class="form-group row">
+          <label class="col-auto col-md-3 font-weight-bold" for="password">password:</label>
+          <input class="col-auto col-md-9 form-control" type="password" id="password" name="password" placeholder="password">
         </div>
-        <div class="form-control row">
-          <button type="submit" class="col-auto btn btn-success">送出</button>
+        <div class="form-group d-flex flex-column">
+          <button type="submit" class="col-auto btn btn-success">Login</button>
+          <a href="/auth/facebook" class="btn btn-primary mt-2">Facebook Login</a>
+          <p class="mt-2 font-weight-bold">Haven't Account?  <a href="./register">Register</a></p>
         </div>
-        <a href="/auth/facebook" class="btn btn-primary">Facebook Login</a>
-        <p>Haven't Account?<a href="./register">Register</a></p>
       </form>
     </div>
   </div>
