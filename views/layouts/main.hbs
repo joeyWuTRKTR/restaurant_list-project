@@ -18,11 +18,14 @@
             width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
           {{#if isAuthenticated}}{{ user.name }}'s {{/if}}餐廳清單
         </a>
-        {{#if isAuthenticated}}
-        <a href="./users/logout" class="btn btn-outline-dark">Logout</a>
-        {{else}}
-        <a href="./users/login" class="btn btn-outline-dark">Login</a>
-        {{/if}}
+        <div class="navbar-info">
+          <a class="restaurant-create btn btn-outline-primary" href="./restaurants/new">新增餐廳資訊</a>
+          {{#if isAuthenticated}}
+          <a href="./users/logout" class="btn btn-outline-dark">Logout</a>
+          {{else}}
+          <a href="./users/login" class="btn btn-outline-dark">Login</a>
+          {{/if}}
+        </div>
       </div>
     </nav>
     <div class="banner"></div>
