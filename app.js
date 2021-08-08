@@ -9,7 +9,9 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
 
-require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 // include restaurant 
 const Restaurant = require('./models/restaurant')
@@ -23,7 +25,7 @@ require('./config/mongoose')
 const app = express()
 
 // default port
-const port = 3000
+const port = process.env.PORT
 
 // set template engine
 app.engine('hbs', exphbs({ 
