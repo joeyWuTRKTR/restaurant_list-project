@@ -11,24 +11,52 @@ router.get('/register', (req, res) => {
 // 2. 註冊完成
 router.post('/register', (req, res) => {
   const { name , email, password, passwordConfirm } = req.body
+  const errors = []
+  // 欄位輸入錯誤
+  if (!name || !email || !password || passwordConfirm) {
+    errors.push({ message: '欄位填寫錯誤。' })
+  }
+  // 密碼和驗證密碼不一致
+  if (password !== passwordConfirm) {
+    errors.push({ message: '密碼和驗證密碼不一致。' })
+  }
+
+  if (!errors.length) {
+    return res.render('register', {
+      errors,
+      name,
+      email,
+      pasword,
+      passwordConfirm
+    })
+  }
+
   User.findOne({ email }).then(user => {
     if (user) {
-      console.log('this email is registed already!')
+      errors.push({ message: '此帳號已經註冊過!' })
       return res.render('register', {
+        errors,
         name, 
         email,
         password,
         passwordConfirm
       })
-    } else {
-      return User.create({
+    }
+    // return User.create({
+    //   name,
+    //   email,
+    //   password
+    // })
+    return bcrypt
+      .genSalt(10) // 產生"鹽"，複雜度係數10
+      .then(salt => bcrypt.hash(password, salt)) // 為使用者密碼"加鹽"，產生雜湊值
+      .then(hash => User.create({
         name,
         email,
-        password
-      })
+        password: hash
+      }))
       .then(() => res.redirect('/'))
       .catch(err => console.log(err))
-    }
   })
 })
 
@@ -47,6 +75,7 @@ router.post('/login', passport.authenticate('local', {
 // 5. 登出
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '你已經成功登出。')
   res.redirect('/users/login')
 })
 
