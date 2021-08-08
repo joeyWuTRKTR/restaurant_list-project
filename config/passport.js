@@ -1,4 +1,5 @@
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
 
@@ -16,11 +17,15 @@ module.exports = app => {
           return done(null, false, { message: 'Email is not registed!'})
         }
         // email 或 password不正確
-        if (user.password !== password) {
-          return done(null, false, { message: 'Email or Password incorrect.'})
-        }
-        // 註冊成功
-        return done(null, user)
+        // password 使用者的輸入值
+        // user.password資料庫的雜湊值
+        return bcrypt.compare(password, user.password).then(isMatch => {
+          if (!isMatch) {
+            return done(null, false, { message: 'Email or Password incorrect.'})
+          }
+          // 登入成功
+          return done(null, user)
+        })
       })
       .catch(err => done(err, false))
   }))

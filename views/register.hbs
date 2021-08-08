@@ -5,23 +5,23 @@
     <div class="card mt-3">
       <form action="/users/register" method="POST">
         <div class="form-control row">
-          <label class="col-md-6" for="name">user name:</label>
-          <input type="text" id="name" name="name" placeholder="user name" value="{{ name }}" required>
+          <label class="col-md-6 col-auto" for="name">user name:</label>
+          <input class="col-md-6 col-auto" type="text" id="name" name="name" placeholder="user name" value="{{ name }}" required>
         </div>
 
         <div class="form-control row">
-          <label class="col-md-6" for="email">email:</label>
-          <input type="email" id="email" name="email" placeholder="abc@1234" value="{{ email }}" required>
+          <label class="col-md-6 col-auto" for="email">email:</label>
+          <input class="col-md-6 col-auto" type="email" id="email" name="email" placeholder="abc@1234" value="{{ email }}" required>
         </div>
 
         <div class="form-control row">
-          <label class="col-md-6" for="password">password:</label>
-          <input type="password" id="password" name="password" placeholder="password" value="{{ password }}" required>
+          <label class="col-md-6 col-auto" for="password">password:</label>
+          <input class="col-md-6 col-auto" type="password" id="password" name="password" placeholder="password" value="{{ password }}" required>
         </div>
 
         <div class="form-control row">
-          <label class="col-md-6" for="passwordConfirm">password confirm</label>
-          <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="password confirm" value="{{ passwordConfirm }}" required>
+          <label class="col-md-6 col-auto" for="passwordConfirm">password confirm</label>
+          <input class="col-md-6 col-auto" type="password" id="passwordConfirm" name="passwordConfirm" placeholder="password confirm" value="{{ passwordConfirm }}" required>
         </div>
         <button type="submit" class="btn btn-primary">送出</button>
       </form>
