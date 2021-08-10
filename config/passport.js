@@ -10,11 +10,13 @@ module.exports = app => {
   app.use(passport.session())
 
   // strategy
-  passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+  // 使用passReqToCallback: true來呼叫req.flash
+  passport.use(new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, (req, email, password, done) => {
     User.findOne({ email })
       .then(user => {
         // email 未被註冊
         if (!user) {
+          req.flash('warning_msg', '此信箱未註冊!')
           return done(null, false, { message: 'Email is not registed!'})
         }
         // email 或 password不正確
@@ -22,7 +24,8 @@ module.exports = app => {
         // user.password資料庫的雜湊值
         return bcrypt.compare(password, user.password).then(isMatch => {
           if (!isMatch) {
-            return done(null, false, { message: 'Email or Password incorrect.'})
+            req.flash('warning_msg', '密碼不正確!')
+            return done(null, false, { message: 'Password incorrect.'})
           }
           // 登入成功
           return done(null, user)

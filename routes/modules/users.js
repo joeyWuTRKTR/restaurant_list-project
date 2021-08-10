@@ -20,12 +20,12 @@ router.post('/register', (req, res) => {
   if (password !== passwordConfirm) {
     errors.push({ message: '密碼和驗證密碼不一致。' })
   }
-  if (!errors.length) {
+  if (errors.length) {
     return res.render('register', {
       errors,
       name,
       email,
-      pasword,
+      password,
       passwordConfirm
     })
   }
@@ -49,7 +49,7 @@ router.post('/register', (req, res) => {
         email,
         password: hash
       }))
-      .then(() => res.redirect('/'))
+      .then(() => res.redirect('/usrs/login'))
       .catch(err => console.log(err))
   })
 })
